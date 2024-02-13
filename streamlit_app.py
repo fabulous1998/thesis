@@ -61,21 +61,21 @@ related_works = []
 
 if 'submitted' not in st.session_state or st.session_state['submitted'] == False:
     with st.form("user_info"):
-        username = st.text_input('请填写你的用户名')
+        username = st.text_input('Please input your username')
         research_fields = ['Physics', 'Mathematics', 'Quantitative Biology', 'Computer Science', 'Quantitative Finance',
                                   'Statistics', 'Electrical Engineering and Systems Science', 'Economics']
-        field = st.selectbox('请选择本次写作的研究领域', research_fields)
+        field = st.selectbox('Please select the research field', research_fields)
         st.session_state['field'] = field
         # 创建一个文本输入框供用户输入研究主题
-        topic = st.text_input('请输入本次写作的研究主题')
+        topic = st.text_input('Please input the research topic')
         st.session_state['topic'] = topic
 
         outline = st.session_state.get('generated_outline', '')
 
-        uploaded_files = st.file_uploader("请上传一篇本次写作的相关工作论文", accept_multiple_files=True, type=['pdf'])
+        uploaded_files = st.file_uploader("Please upload the template papers in PDF format", accept_multiple_files=True, type=['pdf'])
 
         # Every form must have a submit button.
-        submitted = st.form_submit_button("提交")
+        submitted = st.form_submit_button("Submit")
         if submitted:
             if topic:
                 st.session_state['submitted'] = True
@@ -105,15 +105,15 @@ if 'submitted' in st.session_state and st.session_state['submitted']:
         tab1, tab2 = st.tabs(["Outline", "Writing"])
         with tab1:
             with st.container():
-                st.info('已根据你输入的研究主题和上传的相关工作生成本次写作的大纲\n'
-                        '- 你可以在以下区域进行手动修改\n'
-                        '- 点击"确认"键即可保存大纲并前往写作', icon="ℹ️")
+                st.info('The outline has been generated based on the research topic and the template papers\n'
+                        '- You can manually modify in the following area\n'
+                        '- Click the "Confirm" button to save the outline and proceed to writing', icon="ℹ️")
 
             outline = st.text_area(label='Outline', key='Outline', value=st.session_state['generated_outline'], height=220)
 
             # 显示生成的文本
             if 'generated_outline' in st.session_state and st.session_state['generated_outline']:
-                if st.button('确认', key='accept_outline'):
+                if st.button('Confirm', key='accept_outline'):
                     if not st.session_state['all_text']:
                         st.session_state['all_text'] = outline_to_dict(outline)
                     else:
@@ -138,10 +138,10 @@ if 'submitted' in st.session_state and st.session_state['submitted']:
                 if st.session_state['all_text']:
                     display = st.session_state['all_text']
                 secs = [str(sec) for sec in display['outline']]
-                section = st.selectbox('请选择你正在写作的章节', secs, on_change=lambda: reset_text(display, secs[0]), key='sec')
+                section = st.selectbox('Please choose the section', secs, on_change=lambda: reset_text(display, secs[0]), key='sec')
                 st.session_state['writing_sec'] = section
                 points = display['outline'][section]['points']
-                uploaded_files = st.file_uploader("请上传该章节的参考文献", accept_multiple_files=True,
+                uploaded_files = st.file_uploader("Please upload the references in PDF format", accept_multiple_files=True,
                                                   type=['pdf'])
                 draft = ['' for point in points]
 
@@ -152,7 +152,7 @@ if 'submitted' in st.session_state and st.session_state['submitted']:
 
                 revise, accept = st.columns([1, 1])
                 # splits = ''
-                if revise.button('修订'):
+                if revise.button('Revise'):
                     ref_path = os.path.join(path_prefix, 'references', section)
                     vec_path = os.path.join(path_prefix, 'related_works', 'chroma')
                     for file in uploaded_files:
@@ -163,7 +163,7 @@ if 'submitted' in st.session_state and st.session_state['submitted']:
                     revision = st.session_state['generated_text']
                     st.rerun()
                 if st.session_state['generated_text']:
-                    if accept.button('确认', key='accept_text'):
+                    if accept.button('Confirm', key='accept_text'):
                         # 在右侧显示文本
                         display['outline'][section]['content'] = revision
                         display['outline'][section]['draft'] = draft
@@ -172,7 +172,7 @@ if 'submitted' in st.session_state and st.session_state['submitted']:
                         st.rerun()
 
             else:
-                st.error("你还没制定你的写作大纲，请在菜单栏选择 \"Outline\" 前往制定.", icon="🚨")
+                st.error("You have not yet planned your writing outline. Please select 'Outline' in the menu bar to proceed with the plan.", icon="🚨")
 
     # 在右边的列（col2）中显示用户已接受的文本
     with col2:
