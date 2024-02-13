@@ -84,7 +84,6 @@ if 'submitted' not in st.session_state or st.session_state['submitted'] == False
                 init_dirs(path_prefix)
                 for file in uploaded_files:
                     save_pdf(file, path)
-                save_pdf_chroma(path)
                 related_works = split_pdf_by_outline(path)
                 works_tmp = []
                 rel_outline = ''
