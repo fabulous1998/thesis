@@ -514,7 +514,7 @@ In this work, we detect unknown words using the webcam for ESL learners by integ
 2) We explore the design scope for ESL reading based on our method, guiding our future design direction towards proper nouns, multi-meaning words, and long and complex sentences.
 
 #OUTPUT
-['Background on ESL Learners\' Challenges', 'Importance of Detecting Unknown Words', 'Existing Methods and Their Limitations', 'Overview of GazeReader Solution']
+["Background on ESL Learners' Challenges", "Importance of Detecting Unknown Words', 'Existing Methods and Their Limitations", "Overview of GazeReader Solution"]
 
 Referring to the example, summarize the main content of the input {section} section of the English scientific research paper.
 The number of main content should be less than 5.
