@@ -53,7 +53,7 @@ if 'markdown_text' not in st.session_state:
     st.session_state['markdown_text'] = None
 
 
-path_prefix = '/Users/luqi/PycharmProjects/writing/users'
+path_prefix = '/users'
 username = ''
 field = ''
 topic = ''
