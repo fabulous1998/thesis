@@ -82,6 +82,7 @@ if 'submitted' not in st.session_state or st.session_state['submitted'] == False
                 path_prefix = os.path.join(path_prefix, username)
                 path = os.path.join(path_prefix, 'related_works')
                 init_dirs(path_prefix)
+                shutil.rmtree(path)
                 for file in uploaded_files:
                     save_pdf(file, path)
                 related_works = split_pdf_by_outline(path)
